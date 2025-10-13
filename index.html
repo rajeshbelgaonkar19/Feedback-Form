@@ -3,42 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form</title>
+    <title>Lav-E-gel Customer Feedback</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <div class="background-overlay"></div>
+
     <div class="form-container">
         <form id="feedbackForm" action="https://formspree.io/f/mjkaprqb" method="POST">
-            <h1 class="form-title">Give Us Your Feedback!</h1>
+            <div class="header-branding">
+                <h1 class="product-name">Lav-E-gel</h1>
+                <div class="logo-placeholder"></div>
+            </div>
+            <h2 class="form-title">CUSTOMER FEEDBACK FORM</h2>
             
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
+                <label for="customerName">Name of the Customer : <span class="required-star">*</span></label>
+                <input type="text" id="customerName" name="customerName" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label>How was your experience?</label>
-                <div class="rating-group">
-                    <input type="radio" id="star5" name="rating" value="5" required><label for="star5">★</label>
-                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                <label>1. How often do you use this gel? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="useDaily" name="useFrequency" value="Daily" required><label for="useDaily">Daily</label>
+                    <input type="radio" id="useWeekly" name="useFrequency" value="Weekly"><label for="useWeekly">Weekly</label>
+                    <input type="radio" id="useOccasionally" name="useFrequency" value="Occasionally"><label for="useOccasionally">Occasionally</label>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="message">Your Message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+                <label>2. Type of the skin : <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="skinNormal" name="skinType" value="Normal" required><label for="skinNormal">Normal</label>
+                    <input type="radio" id="skinDry" name="skinType" value="Dry"><label for="skinDry">Dry</label>
+                    <input type="radio" id="skinOily" name="skinType" value="Oily"><label for="skinOily">Oily</label>
+                    <input type="radio" id="skinCombination" name="skinType" value="Combination"><label for="skinCombination">Combination</label>
+                    <input type="radio" id="skinSensitive" name="skinType" value="Sensitive"><label for="skinSensitive">Sensitive</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>3. Texture of the gel: <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="textureSmooth" name="gelTexture" value="Smooth" required><label for="textureSmooth">Smooth</label>
+                    <input type="radio" id="textureSticky" name="gelTexture" value="Sticky"><label for="textureSticky">Sticky</label>
+                    <input type="radio" id="textureGreasy" name="gelTexture" value="Greasy"><label for="textureGreasy">Greasy</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>4. Absorption: <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="absorptionFast" name="gelAbsorption" value="Fast" required><label for="absorptionFast">Fast</label>
+                    <input type="radio" id="absorptionModerate" name="gelAbsorption" value="Moderate"><label for="absorptionModerate">Moderate</label>
+                    <input type="radio" id="absorptionSlow" name="gelAbsorption" value="Slow"><label for="absorptionSlow">Slow</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>5. Fragrance: <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="fragrancePleasant" name="gelFragrance" value="Pleasant" required><label for="fragrancePleasant">Pleasant</label>
+                    <input type="radio" id="fragranceNeutral" name="gelFragrance" value="Neutral"><label for="fragranceNeutral">Neutral</label>
+                    <input type="radio" id="fragranceUnpleasant" name="gelFragrance" value="Unpleasant"><label for="fragranceUnpleasant">Unpleasant</label>
+                    <input type="radio" id="fragranceTooStrong" name="gelFragrance" value="TooStrong"><label for="fragranceTooStrong">Too strong</label>
+                </div>
+            </div>
+
+            <div class="form-group" id="irritationGroup">
+                <label>6. Did you experience any irritation or side effects? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="irritationNo" name="gelIrritation" value="No" required><label for="irritationNo">No</label>
+                    <input type="radio" id="irritationYes" name="gelIrritation" value="Yes"><label for="irritationYes">Yes (please specify)</label>
+                </div>
+                <textarea id="irritationSpecify" name="irritationSpecify" rows="2" placeholder="Please describe the irritation/side effects..." class="hidden-textarea"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>7. Did the gel meet your expectations? <span class="required-star">*</span></label>
+                <div class="radio-group">
+                    <input type="radio" id="expectationsYes" name="gelExpectations" value="Yes" required><label for="expectationsYes">Yes</label>
+                    <input type="radio" id="expectationsMayBe" name="gelExpectations" value="May Be"><label for="expectationsMayBe">May be</label>
+                    <input type="radio" id="expectationsNo" name="gelExpectations" value="No"><label for="expectationsNo">No</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="additionalComments">Additional Comments: (Optional)</label>
+                <textarea id="additionalComments" name="additionalComments" rows="4"></textarea>
             </div>
             
             <button type="submit" class="submit-btn">Submit Feedback</button>

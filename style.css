@@ -1,11 +1,15 @@
 /* --- Basic Setup & Variables --- */
 :root {
-    --primary-color: #6a11cb;
-    --secondary-color: #2575fc;
-    --background-color: #f4f7fc;
+    --primary-color: #7b4397; /* Deeper Lavender */
+    --secondary-color: #d9afd9; /* Lighter Lavender - used for accents, but maybe too light for buttons */
+    --button-start-color: #6a11cb; /* A strong purple/lavender start for button */
+    --button-end-color: #8f5c9e;   /* A complementary, slightly lighter purple/lavender end for button */
+    --form-bg: #ffffff; /* White card for form */
     --text-color: #333;
-    --card-bg: #ffffff;
-    --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --placeholder-color: #999;
+    --shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    --border-color: #e0e0e0;
+    --accent-color: #8f5c9e; /* For stars/highlights */
 }
 
 * {
@@ -16,110 +20,325 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--background-color);
     color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- Background Overlay --- */
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/lavender-bg.png'); /* Using the new laptop-ratio background */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    z-index: -1;
+    filter: blur(2px);
 }
 
 /* --- Form Container --- */
 .form-container {
-    background: var(--card-bg);
+    background: var(--form-bg);
     padding: 40px;
-    border-radius: 12px;
+    border-radius: 20px; /* Slightly more rounded */
     box-shadow: var(--shadow);
     width: 100%;
-    max-width: 500px;
+    max-width: 650px; /* A bit wider for desktop */
     opacity: 0; /* Hidden initially for animation */
-    transform: translateY(30px); /* Hidden initially for animation */
+    transform: translateY(40px); /* Adjust initial position */
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Header Branding --- */
+.header-branding {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; /* Slightly larger product name */
+    color: var(--primary-color);
+    margin-right: 15px;
+    letter-spacing: 1.5px; /* More prominent letter spacing */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.08); /* Finer shadow */
+}
+
+.logo-placeholder {
+    width: 75px; /* Slightly larger logo */
+    height: 75px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    background-image: url('images/lav-e-gel-logo1.png');
+    background-size: cover;
+    background-position: center;
+    border: 3px solid white; /* Thicker white border */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15); /* More pronounced shadow */
 }
 
 .form-title {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 35px; /* More space below title */
     font-weight: 600;
+    font-size: 1.8rem; /* Larger form title */
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+}
+/* Subtle underline for the form title */
+.form-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    margin: 15px auto 0 auto;
+    border-radius: 50%;
 }
 
 /* --- Form Elements --- */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* More space between questions */
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* More space below label */
     font-weight: 600;
+    font-size: 1.1rem; /* Slightly larger label font */
+    color: var(--text-color);
+    line-height: 1.4; /* Better readability */
 }
 
-.form-group input,
+.required-star {
+    color: #e74c3c; /* A more distinct red for required fields */
+    margin-left: 5px;
+}
+
+.form-group input[type="text"],
 .form-group textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 14px 18px; /* Larger padding */
+    border: 1px solid var(--border-color);
+    border-radius: 12px; /* More rounded inputs */
     font-family: 'Poppins', sans-serif;
+    font-size: 1rem; /* Clearer font size */
+    color: var(--text-color);
     transition: all 0.3s ease;
+    background-color: #fcfcfc;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow */
 }
 
-.form-group input:focus,
+.form-group input[type="text"]::placeholder,
+.form-group textarea::placeholder {
+    color: var(--placeholder-color);
+    font-style: italic;
+}
+
+.form-group input[type="text"]:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+    box-shadow: 0 0 0 4px rgba(123, 67, 151, 0.15); /* Slightly larger focus shadow */
+    background-color: #fff;
 }
 
-/* --- Star Rating Styling --- */
-.rating-group {
+/* --- Radio Button Styling (for your Q&A format) --- */
+.radio-group {
     display: flex;
-    flex-direction: row-reverse; /* Makes the stars fill from right to left */
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px; /* More space between radio options */
+    margin-top: 10px;
 }
 
-.rating-group input[type="radio"] {
-    display: none; /* Hide the actual radio buttons */
+.radio-group input[type="radio"] {
+    display: none;
 }
 
-.rating-group label {
-    font-size: 2.5rem;
-    color: #ddd;
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
-    transition: color 0.2s ease;
+    font-weight: 400;
+    padding: 10px 20px; /* Larger padding for touch targets */
+    border: 1px solid var(--border-color);
+    border-radius: 25px; /* More rounded, pill-shaped */
+    transition: all 0.2s ease;
+    background-color: #f9f9f9;
+    color: var(--text-color);
+    user-select: none;
+    margin-bottom: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Subtle button shadow */
 }
 
-.rating-group input[type="radio"]:checked ~ label,
-.rating-group label:hover,
-.rating-group label:hover ~ label {
-    color: #f5a623; /* Gold color for selected/hovered stars */
+.radio-group input[type="radio"]:checked + label {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15); /* More pronounced shadow on selected */
+    transform: translateY(-2px); /* Slight lift on selection */
 }
 
+.radio-group label:hover:not(.radio-group input[type="radio"]:checked + label) {
+    border-color: var(--accent-color);
+    background-color: #f2e9f7; /* Lighter hover background */
+    transform: translateY(-1px); /* Subtle lift on hover */
+}
+
+/* Conditional Textarea Styling */
+.hidden-textarea {
+    display: none; /* Hidden by default */
+    opacity: 0;
+    height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-out; /* Smooth transition for appearance */
+}
+
+.visible-textarea {
+    display: block;
+    opacity: 1;
+    height: auto; /* Allow height to adjust */
+    margin-top: 15px; /* Space above textarea when visible */
+    transition: all 0.4s ease-in;
+}
+
+
+/* --- Submit Button --- */
+/* --- Submit Button --- */
+/* --- Submit Button --- */
 /* --- Submit Button --- */
 .submit-btn {
     width: 100%;
-    padding: 15px;
+    padding: 18px;
     border: none;
-    border-radius: 8px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 12px;
+    background: linear-gradient(45deg, #6a11cb, #8f5c9e); 
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    letter-spacing: 0.5px;
+    opacity: 1; /* Ensure it is visible by default */
 }
 
 .submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
-
 /* --- Responsive Design --- */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
     .form-container {
-        padding: 25px;
+        padding: 30px 25px; /* Adjusted padding for smaller screens */
+        max-width: 95%; /* Take up more width */
+        border-radius: 15px;
+    }
+    .product-name {
+        font-size: 2.5rem;
+        margin-right: 10px;
+    }
+    .logo-placeholder {
+        width: 60px;
+        height: 60px;
+        border: 2px solid white;
     }
     .form-title {
         font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+    .form-title::after {
+        margin-top: 10px;
+    }
+    .form-group label {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    .form-group input[type="text"],
+    .form-group textarea {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+    .radio-group {
+        gap: 12px;
+    }
+    .radio-group label {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        border-radius: 20px;
+    }
+    .submit-btn {
+        padding: 15px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 20px;
+    }
+    .product-name {
+        font-size: 2rem;
+        margin-right: 8px;
+    }
+    .logo-placeholder {
+        width: 50px;
+        height: 50px;
+    }
+    .form-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    .form-title::after {
+        width: 40px;
+        height: 2px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        font-size: 0.95rem;
+    }
+    .form-group input[type="text"],
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    .radio-group {
+        flex-direction: column; /* Stack radio options on very small screens */
+        gap: 10px;
+    }
+    .radio-group label {
+        width: 100%; /* Full width for radio buttons */
+        justify-content: center; /* Center text in full-width buttons */
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .submit-btn {
+        padding: 12px;
+        font-size: 1rem;
+        margin-top: 20px;
     }
 }
